@@ -159,8 +159,8 @@ public class Spider {
             ta.setArticlelatestcmttime(System.currentTimeMillis());
             ta.setArticleperfect(0);
             ta.setRedditscore(0.0);
-            am.insert(newArticle);
-            tam.insert(ta);
+//            am.insert(newArticle);
+//            tam.insert(ta);
         }
 	}
 	

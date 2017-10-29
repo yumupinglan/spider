@@ -24,7 +24,7 @@ import org.springframework.context.annotation.ComponentScan;
 @MapperScan(basePackages = "com.oneyear.spider.mapper")
 public class Application {
 	
-	private static final String URL = "http://blog.csdn.net/sinyu890807/article/list/2";
+	private static final String URL = "http://blog.csdn.net/zhaokaiqiang1992";
 
 	public static void main(String[] args) throws IOException {
 		ConfigurableApplicationContext context = SpringApplication.run(Application.class, args);
