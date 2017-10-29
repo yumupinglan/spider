@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+
+<generatorConfiguration>
+  <!-- 数据库驱动 -->
+  <classPathEntry location="D:\maven_repository\mysql\mysql-connector-java\5.1.42\mysql-connector-java-5.1.42.jar" />
+  
+  <context id="MySqlTables" targetRuntime="MyBatis3">
+
+ 	<plugin type="org.mybatis.generator.plugins.RenameExampleClassPlugin">  
+    			<property name="searchString" value="Example$" />  
+    			<property name="replaceString" value="Criteria" />  
+	</plugin>
+    <commentGenerator>  
+		<property name="suppressAllComments" value="true" />  
+		<property name="suppressDate" value="false" />
+    </commentGenerator>   
+
+
+    <!-- 数据库配置 -->
+    <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+        connectionURL="jdbc:mysql://118.31.12.253:3306/myBlog"
+        userId="root"
+        password="Iamcoder@2017">
+    </jdbcConnection>
+
+    <!-- model配置 -->
+    <javaModelGenerator targetPackage="com.oneyear.spider.model" targetProject="E:\workspace\sts_20170719\com.oneyear.spider\src\main\java">
+      <property name="enableSubPackages" value="true" />
+      <property name="trimStrings" value="true" />
+    </javaModelGenerator>
+
+
+    <!-- dao配置 -->
+    <sqlMapGenerator  targetPackage="com.oneyear.spider.mapper"  targetProject="E:\workspace\sts_20170719\com.oneyear.spider\src\main\resources">
+      <property name="enableSubPackages" value="true" />
+    </sqlMapGenerator>
+
+
+  <javaClientGenerator type="XMLMAPPER" targetPackage="com.oneyear.spider.mapper"  targetProject="E:\workspace\sts_20170719\com.oneyear.spider\src\main\java">
+      <property name="enableSubPackages" value="true" />
+    </javaClientGenerator>
+
+
+   
+		
+    <table tableName="symphony_article" domainObjectName="Article" enableCountByExample="false"
+			enableUpdateByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" selectByExampleQueryId="false">
+    </table> 
+    <table tableName="symphony_tag_article" domainObjectName="TagArticle" enableCountByExample="false"
+			enableUpdateByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" selectByExampleQueryId="false">
+    </table> 
+  </context>
+</generatorConfiguration>

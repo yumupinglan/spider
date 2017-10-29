@@ -1,0 +1,1 @@
+This project is a spider, used to get articles from different web site.

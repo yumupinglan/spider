@@ -1,0 +1,494 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.oneyear.spider.mapper.ArticleMapper" >
+  <resultMap id="BaseResultMap" type="com.oneyear.spider.model.Article" >
+    <id column="oId" property="oid" jdbcType="VARCHAR" />
+    <result column="articleTitle" property="articletitle" jdbcType="VARCHAR" />
+    <result column="articleTags" property="articletags" jdbcType="VARCHAR" />
+    <result column="articleAuthorId" property="articleauthorid" jdbcType="VARCHAR" />
+    <result column="articleCommentCount" property="articlecommentcount" jdbcType="INTEGER" />
+    <result column="articleViewCount" property="articleviewcount" jdbcType="INTEGER" />
+    <result column="articleRewardPoint" property="articlerewardpoint" jdbcType="INTEGER" />
+    <result column="articlePermalink" property="articlepermalink" jdbcType="VARCHAR" />
+    <result column="articleCreateTime" property="articlecreatetime" jdbcType="BIGINT" />
+    <result column="articleUpdateTime" property="articleupdatetime" jdbcType="BIGINT" />
+    <result column="articleLatestCmtTime" property="articlelatestcmttime" jdbcType="BIGINT" />
+    <result column="articleLatestCmterName" property="articlelatestcmtername" jdbcType="VARCHAR" />
+    <result column="articleRandomDouble" property="articlerandomdouble" jdbcType="DOUBLE" />
+    <result column="articleCommentable" property="articlecommentable" jdbcType="CHAR" />
+    <result column="syncWithSymphonyClient" property="syncwithsymphonyclient" jdbcType="CHAR" />
+    <result column="clientArticleId" property="clientarticleid" jdbcType="VARCHAR" />
+    <result column="clientArticlePermalink" property="clientarticlepermalink" jdbcType="VARCHAR" />
+    <result column="articleEditorType" property="articleeditortype" jdbcType="INTEGER" />
+    <result column="articleStatus" property="articlestatus" jdbcType="INTEGER" />
+    <result column="articleType" property="articletype" jdbcType="INTEGER" />
+    <result column="articleGoodCnt" property="articlegoodcnt" jdbcType="INTEGER" />
+    <result column="articleBadCnt" property="articlebadcnt" jdbcType="INTEGER" />
+    <result column="articleCollectCnt" property="articlecollectcnt" jdbcType="INTEGER" />
+    <result column="articleWatchCnt" property="articlewatchcnt" jdbcType="INTEGER" />
+    <result column="redditScore" property="redditscore" jdbcType="DOUBLE" />
+    <result column="articleCity" property="articlecity" jdbcType="VARCHAR" />
+    <result column="articleIP" property="articleip" jdbcType="VARCHAR" />
+    <result column="articleUA" property="articleua" jdbcType="VARCHAR" />
+    <result column="articleStick" property="articlestick" jdbcType="BIGINT" />
+    <result column="articleAnonymous" property="articleanonymous" jdbcType="INTEGER" />
+    <result column="articlePerfect" property="articleperfect" jdbcType="INTEGER" />
+    <result column="articleAnonymousView" property="articleanonymousview" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.oneyear.spider.model.ArticleWithBLOBs" extends="BaseResultMap" >
+    <result column="articleContent" property="articlecontent" jdbcType="LONGVARCHAR" />
+    <result column="articleRewardContent" property="articlerewardcontent" jdbcType="LONGVARCHAR" />
+    <result column="articleAudioURL" property="articleaudiourl" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    oId, articleTitle, articleTags, articleAuthorId, articleCommentCount, articleViewCount, 
+    articleRewardPoint, articlePermalink, articleCreateTime, articleUpdateTime, articleLatestCmtTime, 
+    articleLatestCmterName, articleRandomDouble, articleCommentable, syncWithSymphonyClient, 
+    clientArticleId, clientArticlePermalink, articleEditorType, articleStatus, articleType, 
+    articleGoodCnt, articleBadCnt, articleCollectCnt, articleWatchCnt, redditScore, articleCity, 
+    articleIP, articleUA, articleStick, articleAnonymous, articlePerfect, articleAnonymousView
+  </sql>
+  <sql id="Blob_Column_List" >
+    articleContent, articleRewardContent, articleAudioURL
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from symphony_article
+    where oId = #{oid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from symphony_article
+    where oId = #{oid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.oneyear.spider.model.ArticleWithBLOBs" >
+    insert into symphony_article (oId, articleTitle, articleTags, 
+      articleAuthorId, articleCommentCount, articleViewCount, 
+      articleRewardPoint, articlePermalink, articleCreateTime, 
+      articleUpdateTime, articleLatestCmtTime, 
+      articleLatestCmterName, articleRandomDouble, 
+      articleCommentable, syncWithSymphonyClient, clientArticleId, 
+      clientArticlePermalink, articleEditorType, 
+      articleStatus, articleType, articleGoodCnt, 
+      articleBadCnt, articleCollectCnt, articleWatchCnt, 
+      redditScore, articleCity, articleIP, 
+      articleUA, articleStick, articleAnonymous, 
+      articlePerfect, articleAnonymousView, articleContent, 
+      articleRewardContent, articleAudioURL
+      )
+    values (#{oid,jdbcType=VARCHAR}, #{articletitle,jdbcType=VARCHAR}, #{articletags,jdbcType=VARCHAR}, 
+      #{articleauthorid,jdbcType=VARCHAR}, #{articlecommentcount,jdbcType=INTEGER}, #{articleviewcount,jdbcType=INTEGER}, 
+      #{articlerewardpoint,jdbcType=INTEGER}, #{articlepermalink,jdbcType=VARCHAR}, #{articlecreatetime,jdbcType=BIGINT}, 
+      #{articleupdatetime,jdbcType=BIGINT}, #{articlelatestcmttime,jdbcType=BIGINT}, 
+      #{articlelatestcmtername,jdbcType=VARCHAR}, #{articlerandomdouble,jdbcType=DOUBLE}, 
+      #{articlecommentable,jdbcType=CHAR}, #{syncwithsymphonyclient,jdbcType=CHAR}, #{clientarticleid,jdbcType=VARCHAR}, 
+      #{clientarticlepermalink,jdbcType=VARCHAR}, #{articleeditortype,jdbcType=INTEGER}, 
+      #{articlestatus,jdbcType=INTEGER}, #{articletype,jdbcType=INTEGER}, #{articlegoodcnt,jdbcType=INTEGER}, 
+      #{articlebadcnt,jdbcType=INTEGER}, #{articlecollectcnt,jdbcType=INTEGER}, #{articlewatchcnt,jdbcType=INTEGER}, 
+      #{redditscore,jdbcType=DOUBLE}, #{articlecity,jdbcType=VARCHAR}, #{articleip,jdbcType=VARCHAR}, 
+      #{articleua,jdbcType=VARCHAR}, #{articlestick,jdbcType=BIGINT}, #{articleanonymous,jdbcType=INTEGER}, 
+      #{articleperfect,jdbcType=INTEGER}, #{articleanonymousview,jdbcType=INTEGER}, #{articlecontent,jdbcType=LONGVARCHAR}, 
+      #{articlerewardcontent,jdbcType=LONGVARCHAR}, #{articleaudiourl,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.oneyear.spider.model.ArticleWithBLOBs" >
+    insert into symphony_article
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="oid != null" >
+        oId,
+      </if>
+      <if test="articletitle != null" >
+        articleTitle,
+      </if>
+      <if test="articletags != null" >
+        articleTags,
+      </if>
+      <if test="articleauthorid != null" >
+        articleAuthorId,
+      </if>
+      <if test="articlecommentcount != null" >
+        articleCommentCount,
+      </if>
+      <if test="articleviewcount != null" >
+        articleViewCount,
+      </if>
+      <if test="articlerewardpoint != null" >
+        articleRewardPoint,
+      </if>
+      <if test="articlepermalink != null" >
+        articlePermalink,
+      </if>
+      <if test="articlecreatetime != null" >
+        articleCreateTime,
+      </if>
+      <if test="articleupdatetime != null" >
+        articleUpdateTime,
+      </if>
+      <if test="articlelatestcmttime != null" >
+        articleLatestCmtTime,
+      </if>
+      <if test="articlelatestcmtername != null" >
+        articleLatestCmterName,
+      </if>
+      <if test="articlerandomdouble != null" >
+        articleRandomDouble,
+      </if>
+      <if test="articlecommentable != null" >
+        articleCommentable,
+      </if>
+      <if test="syncwithsymphonyclient != null" >
+        syncWithSymphonyClient,
+      </if>
+      <if test="clientarticleid != null" >
+        clientArticleId,
+      </if>
+      <if test="clientarticlepermalink != null" >
+        clientArticlePermalink,
+      </if>
+      <if test="articleeditortype != null" >
+        articleEditorType,
+      </if>
+      <if test="articlestatus != null" >
+        articleStatus,
+      </if>
+      <if test="articletype != null" >
+        articleType,
+      </if>
+      <if test="articlegoodcnt != null" >
+        articleGoodCnt,
+      </if>
+      <if test="articlebadcnt != null" >
+        articleBadCnt,
+      </if>
+      <if test="articlecollectcnt != null" >
+        articleCollectCnt,
+      </if>
+      <if test="articlewatchcnt != null" >
+        articleWatchCnt,
+      </if>
+      <if test="redditscore != null" >
+        redditScore,
+      </if>
+      <if test="articlecity != null" >
+        articleCity,
+      </if>
+      <if test="articleip != null" >
+        articleIP,
+      </if>
+      <if test="articleua != null" >
+        articleUA,
+      </if>
+      <if test="articlestick != null" >
+        articleStick,
+      </if>
+      <if test="articleanonymous != null" >
+        articleAnonymous,
+      </if>
+      <if test="articleperfect != null" >
+        articlePerfect,
+      </if>
+      <if test="articleanonymousview != null" >
+        articleAnonymousView,
+      </if>
+      <if test="articlecontent != null" >
+        articleContent,
+      </if>
+      <if test="articlerewardcontent != null" >
+        articleRewardContent,
+      </if>
+      <if test="articleaudiourl != null" >
+        articleAudioURL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="oid != null" >
+        #{oid,jdbcType=VARCHAR},
+      </if>
+      <if test="articletitle != null" >
+        #{articletitle,jdbcType=VARCHAR},
+      </if>
+      <if test="articletags != null" >
+        #{articletags,jdbcType=VARCHAR},
+      </if>
+      <if test="articleauthorid != null" >
+        #{articleauthorid,jdbcType=VARCHAR},
+      </if>
+      <if test="articlecommentcount != null" >
+        #{articlecommentcount,jdbcType=INTEGER},
+      </if>
+      <if test="articleviewcount != null" >
+        #{articleviewcount,jdbcType=INTEGER},
+      </if>
+      <if test="articlerewardpoint != null" >
+        #{articlerewardpoint,jdbcType=INTEGER},
+      </if>
+      <if test="articlepermalink != null" >
+        #{articlepermalink,jdbcType=VARCHAR},
+      </if>
+      <if test="articlecreatetime != null" >
+        #{articlecreatetime,jdbcType=BIGINT},
+      </if>
+      <if test="articleupdatetime != null" >
+        #{articleupdatetime,jdbcType=BIGINT},
+      </if>
+      <if test="articlelatestcmttime != null" >
+        #{articlelatestcmttime,jdbcType=BIGINT},
+      </if>
+      <if test="articlelatestcmtername != null" >
+        #{articlelatestcmtername,jdbcType=VARCHAR},
+      </if>
+      <if test="articlerandomdouble != null" >
+        #{articlerandomdouble,jdbcType=DOUBLE},
+      </if>
+      <if test="articlecommentable != null" >
+        #{articlecommentable,jdbcType=CHAR},
+      </if>
+      <if test="syncwithsymphonyclient != null" >
+        #{syncwithsymphonyclient,jdbcType=CHAR},
+      </if>
+      <if test="clientarticleid != null" >
+        #{clientarticleid,jdbcType=VARCHAR},
+      </if>
+      <if test="clientarticlepermalink != null" >
+        #{clientarticlepermalink,jdbcType=VARCHAR},
+      </if>
+      <if test="articleeditortype != null" >
+        #{articleeditortype,jdbcType=INTEGER},
+      </if>
+      <if test="articlestatus != null" >
+        #{articlestatus,jdbcType=INTEGER},
+      </if>
+      <if test="articletype != null" >
+        #{articletype,jdbcType=INTEGER},
+      </if>
+      <if test="articlegoodcnt != null" >
+        #{articlegoodcnt,jdbcType=INTEGER},
+      </if>
+      <if test="articlebadcnt != null" >
+        #{articlebadcnt,jdbcType=INTEGER},
+      </if>
+      <if test="articlecollectcnt != null" >
+        #{articlecollectcnt,jdbcType=INTEGER},
+      </if>
+      <if test="articlewatchcnt != null" >
+        #{articlewatchcnt,jdbcType=INTEGER},
+      </if>
+      <if test="redditscore != null" >
+        #{redditscore,jdbcType=DOUBLE},
+      </if>
+      <if test="articlecity != null" >
+        #{articlecity,jdbcType=VARCHAR},
+      </if>
+      <if test="articleip != null" >
+        #{articleip,jdbcType=VARCHAR},
+      </if>
+      <if test="articleua != null" >
+        #{articleua,jdbcType=VARCHAR},
+      </if>
+      <if test="articlestick != null" >
+        #{articlestick,jdbcType=BIGINT},
+      </if>
+      <if test="articleanonymous != null" >
+        #{articleanonymous,jdbcType=INTEGER},
+      </if>
+      <if test="articleperfect != null" >
+        #{articleperfect,jdbcType=INTEGER},
+      </if>
+      <if test="articleanonymousview != null" >
+        #{articleanonymousview,jdbcType=INTEGER},
+      </if>
+      <if test="articlecontent != null" >
+        #{articlecontent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="articlerewardcontent != null" >
+        #{articlerewardcontent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="articleaudiourl != null" >
+        #{articleaudiourl,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.oneyear.spider.model.ArticleWithBLOBs" >
+    update symphony_article
+    <set >
+      <if test="articletitle != null" >
+        articleTitle = #{articletitle,jdbcType=VARCHAR},
+      </if>
+      <if test="articletags != null" >
+        articleTags = #{articletags,jdbcType=VARCHAR},
+      </if>
+      <if test="articleauthorid != null" >
+        articleAuthorId = #{articleauthorid,jdbcType=VARCHAR},
+      </if>
+      <if test="articlecommentcount != null" >
+        articleCommentCount = #{articlecommentcount,jdbcType=INTEGER},
+      </if>
+      <if test="articleviewcount != null" >
+        articleViewCount = #{articleviewcount,jdbcType=INTEGER},
+      </if>
+      <if test="articlerewardpoint != null" >
+        articleRewardPoint = #{articlerewardpoint,jdbcType=INTEGER},
+      </if>
+      <if test="articlepermalink != null" >
+        articlePermalink = #{articlepermalink,jdbcType=VARCHAR},
+      </if>
+      <if test="articlecreatetime != null" >
+        articleCreateTime = #{articlecreatetime,jdbcType=BIGINT},
+      </if>
+      <if test="articleupdatetime != null" >
+        articleUpdateTime = #{articleupdatetime,jdbcType=BIGINT},
+      </if>
+      <if test="articlelatestcmttime != null" >
+        articleLatestCmtTime = #{articlelatestcmttime,jdbcType=BIGINT},
+      </if>
+      <if test="articlelatestcmtername != null" >
+        articleLatestCmterName = #{articlelatestcmtername,jdbcType=VARCHAR},
+      </if>
+      <if test="articlerandomdouble != null" >
+        articleRandomDouble = #{articlerandomdouble,jdbcType=DOUBLE},
+      </if>
+      <if test="articlecommentable != null" >
+        articleCommentable = #{articlecommentable,jdbcType=CHAR},
+      </if>
+      <if test="syncwithsymphonyclient != null" >
+        syncWithSymphonyClient = #{syncwithsymphonyclient,jdbcType=CHAR},
+      </if>
+      <if test="clientarticleid != null" >
+        clientArticleId = #{clientarticleid,jdbcType=VARCHAR},
+      </if>
+      <if test="clientarticlepermalink != null" >
+        clientArticlePermalink = #{clientarticlepermalink,jdbcType=VARCHAR},
+      </if>
+      <if test="articleeditortype != null" >
+        articleEditorType = #{articleeditortype,jdbcType=INTEGER},
+      </if>
+      <if test="articlestatus != null" >
+        articleStatus = #{articlestatus,jdbcType=INTEGER},
+      </if>
+      <if test="articletype != null" >
+        articleType = #{articletype,jdbcType=INTEGER},
+      </if>
+      <if test="articlegoodcnt != null" >
+        articleGoodCnt = #{articlegoodcnt,jdbcType=INTEGER},
+      </if>
+      <if test="articlebadcnt != null" >
+        articleBadCnt = #{articlebadcnt,jdbcType=INTEGER},
+      </if>
+      <if test="articlecollectcnt != null" >
+        articleCollectCnt = #{articlecollectcnt,jdbcType=INTEGER},
+      </if>
+      <if test="articlewatchcnt != null" >
+        articleWatchCnt = #{articlewatchcnt,jdbcType=INTEGER},
+      </if>
+      <if test="redditscore != null" >
+        redditScore = #{redditscore,jdbcType=DOUBLE},
+      </if>
+      <if test="articlecity != null" >
+        articleCity = #{articlecity,jdbcType=VARCHAR},
+      </if>
+      <if test="articleip != null" >
+        articleIP = #{articleip,jdbcType=VARCHAR},
+      </if>
+      <if test="articleua != null" >
+        articleUA = #{articleua,jdbcType=VARCHAR},
+      </if>
+      <if test="articlestick != null" >
+        articleStick = #{articlestick,jdbcType=BIGINT},
+      </if>
+      <if test="articleanonymous != null" >
+        articleAnonymous = #{articleanonymous,jdbcType=INTEGER},
+      </if>
+      <if test="articleperfect != null" >
+        articlePerfect = #{articleperfect,jdbcType=INTEGER},
+      </if>
+      <if test="articleanonymousview != null" >
+        articleAnonymousView = #{articleanonymousview,jdbcType=INTEGER},
+      </if>
+      <if test="articlecontent != null" >
+        articleContent = #{articlecontent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="articlerewardcontent != null" >
+        articleRewardContent = #{articlerewardcontent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="articleaudiourl != null" >
+        articleAudioURL = #{articleaudiourl,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where oId = #{oid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.oneyear.spider.model.ArticleWithBLOBs" >
+    update symphony_article
+    set articleTitle = #{articletitle,jdbcType=VARCHAR},
+      articleTags = #{articletags,jdbcType=VARCHAR},
+      articleAuthorId = #{articleauthorid,jdbcType=VARCHAR},
+      articleCommentCount = #{articlecommentcount,jdbcType=INTEGER},
+      articleViewCount = #{articleviewcount,jdbcType=INTEGER},
+      articleRewardPoint = #{articlerewardpoint,jdbcType=INTEGER},
+      articlePermalink = #{articlepermalink,jdbcType=VARCHAR},
+      articleCreateTime = #{articlecreatetime,jdbcType=BIGINT},
+      articleUpdateTime = #{articleupdatetime,jdbcType=BIGINT},
+      articleLatestCmtTime = #{articlelatestcmttime,jdbcType=BIGINT},
+      articleLatestCmterName = #{articlelatestcmtername,jdbcType=VARCHAR},
+      articleRandomDouble = #{articlerandomdouble,jdbcType=DOUBLE},
+      articleCommentable = #{articlecommentable,jdbcType=CHAR},
+      syncWithSymphonyClient = #{syncwithsymphonyclient,jdbcType=CHAR},
+      clientArticleId = #{clientarticleid,jdbcType=VARCHAR},
+      clientArticlePermalink = #{clientarticlepermalink,jdbcType=VARCHAR},
+      articleEditorType = #{articleeditortype,jdbcType=INTEGER},
+      articleStatus = #{articlestatus,jdbcType=INTEGER},
+      articleType = #{articletype,jdbcType=INTEGER},
+      articleGoodCnt = #{articlegoodcnt,jdbcType=INTEGER},
+      articleBadCnt = #{articlebadcnt,jdbcType=INTEGER},
+      articleCollectCnt = #{articlecollectcnt,jdbcType=INTEGER},
+      articleWatchCnt = #{articlewatchcnt,jdbcType=INTEGER},
+      redditScore = #{redditscore,jdbcType=DOUBLE},
+      articleCity = #{articlecity,jdbcType=VARCHAR},
+      articleIP = #{articleip,jdbcType=VARCHAR},
+      articleUA = #{articleua,jdbcType=VARCHAR},
+      articleStick = #{articlestick,jdbcType=BIGINT},
+      articleAnonymous = #{articleanonymous,jdbcType=INTEGER},
+      articlePerfect = #{articleperfect,jdbcType=INTEGER},
+      articleAnonymousView = #{articleanonymousview,jdbcType=INTEGER},
+      articleContent = #{articlecontent,jdbcType=LONGVARCHAR},
+      articleRewardContent = #{articlerewardcontent,jdbcType=LONGVARCHAR},
+      articleAudioURL = #{articleaudiourl,jdbcType=LONGVARCHAR}
+    where oId = #{oid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.oneyear.spider.model.Article" >
+    update symphony_article
+    set articleTitle = #{articletitle,jdbcType=VARCHAR},
+      articleTags = #{articletags,jdbcType=VARCHAR},
+      articleAuthorId = #{articleauthorid,jdbcType=VARCHAR},
+      articleCommentCount = #{articlecommentcount,jdbcType=INTEGER},
+      articleViewCount = #{articleviewcount,jdbcType=INTEGER},
+      articleRewardPoint = #{articlerewardpoint,jdbcType=INTEGER},
+      articlePermalink = #{articlepermalink,jdbcType=VARCHAR},
+      articleCreateTime = #{articlecreatetime,jdbcType=BIGINT},
+      articleUpdateTime = #{articleupdatetime,jdbcType=BIGINT},
+      articleLatestCmtTime = #{articlelatestcmttime,jdbcType=BIGINT},
+      articleLatestCmterName = #{articlelatestcmtername,jdbcType=VARCHAR},
+      articleRandomDouble = #{articlerandomdouble,jdbcType=DOUBLE},
+      articleCommentable = #{articlecommentable,jdbcType=CHAR},
+      syncWithSymphonyClient = #{syncwithsymphonyclient,jdbcType=CHAR},
+      clientArticleId = #{clientarticleid,jdbcType=VARCHAR},
+      clientArticlePermalink = #{clientarticlepermalink,jdbcType=VARCHAR},
+      articleEditorType = #{articleeditortype,jdbcType=INTEGER},
+      articleStatus = #{articlestatus,jdbcType=INTEGER},
+      articleType = #{articletype,jdbcType=INTEGER},
+      articleGoodCnt = #{articlegoodcnt,jdbcType=INTEGER},
+      articleBadCnt = #{articlebadcnt,jdbcType=INTEGER},
+      articleCollectCnt = #{articlecollectcnt,jdbcType=INTEGER},
+      articleWatchCnt = #{articlewatchcnt,jdbcType=INTEGER},
+      redditScore = #{redditscore,jdbcType=DOUBLE},
+      articleCity = #{articlecity,jdbcType=VARCHAR},
+      articleIP = #{articleip,jdbcType=VARCHAR},
+      articleUA = #{articleua,jdbcType=VARCHAR},
+      articleStick = #{articlestick,jdbcType=BIGINT},
+      articleAnonymous = #{articleanonymous,jdbcType=INTEGER},
+      articlePerfect = #{articleperfect,jdbcType=INTEGER},
+      articleAnonymousView = #{articleanonymousview,jdbcType=INTEGER}
+    where oId = #{oid,jdbcType=VARCHAR}
+  </update>
+</mapper>

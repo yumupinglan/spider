@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.oneyear.spider.mapper.TagArticleMapper" >
+  <resultMap id="BaseResultMap" type="com.oneyear.spider.model.TagArticle" >
+    <id column="oId" property="oid" jdbcType="VARCHAR" />
+    <result column="article_oId" property="articleOid" jdbcType="VARCHAR" />
+    <result column="tag_oId" property="tagOid" jdbcType="VARCHAR" />
+    <result column="articleCommentCount" property="articlecommentcount" jdbcType="INTEGER" />
+    <result column="articleLatestCmtTime" property="articlelatestcmttime" jdbcType="BIGINT" />
+    <result column="redditScore" property="redditscore" jdbcType="DOUBLE" />
+    <result column="articlePerfect" property="articleperfect" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    oId, article_oId, tag_oId, articleCommentCount, articleLatestCmtTime, redditScore, 
+    articlePerfect
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from symphony_tag_article
+    where oId = #{oid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from symphony_tag_article
+    where oId = #{oid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.oneyear.spider.model.TagArticle" >
+    insert into symphony_tag_article (oId, article_oId, tag_oId, 
+      articleCommentCount, articleLatestCmtTime, 
+      redditScore, articlePerfect)
+    values (#{oid,jdbcType=VARCHAR}, #{articleOid,jdbcType=VARCHAR}, #{tagOid,jdbcType=VARCHAR}, 
+      #{articlecommentcount,jdbcType=INTEGER}, #{articlelatestcmttime,jdbcType=BIGINT}, 
+      #{redditscore,jdbcType=DOUBLE}, #{articleperfect,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.oneyear.spider.model.TagArticle" >
+    insert into symphony_tag_article
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="oid != null" >
+        oId,
+      </if>
+      <if test="articleOid != null" >
+        article_oId,
+      </if>
+      <if test="tagOid != null" >
+        tag_oId,
+      </if>
+      <if test="articlecommentcount != null" >
+        articleCommentCount,
+      </if>
+      <if test="articlelatestcmttime != null" >
+        articleLatestCmtTime,
+      </if>
+      <if test="redditscore != null" >
+        redditScore,
+      </if>
+      <if test="articleperfect != null" >
+        articlePerfect,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="oid != null" >
+        #{oid,jdbcType=VARCHAR},
+      </if>
+      <if test="articleOid != null" >
+        #{articleOid,jdbcType=VARCHAR},
+      </if>
+      <if test="tagOid != null" >
+        #{tagOid,jdbcType=VARCHAR},
+      </if>
+      <if test="articlecommentcount != null" >
+        #{articlecommentcount,jdbcType=INTEGER},
+      </if>
+      <if test="articlelatestcmttime != null" >
+        #{articlelatestcmttime,jdbcType=BIGINT},
+      </if>
+      <if test="redditscore != null" >
+        #{redditscore,jdbcType=DOUBLE},
+      </if>
+      <if test="articleperfect != null" >
+        #{articleperfect,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.oneyear.spider.model.TagArticle" >
+    update symphony_tag_article
+    <set >
+      <if test="articleOid != null" >
+        article_oId = #{articleOid,jdbcType=VARCHAR},
+      </if>
+      <if test="tagOid != null" >
+        tag_oId = #{tagOid,jdbcType=VARCHAR},
+      </if>
+      <if test="articlecommentcount != null" >
+        articleCommentCount = #{articlecommentcount,jdbcType=INTEGER},
+      </if>
+      <if test="articlelatestcmttime != null" >
+        articleLatestCmtTime = #{articlelatestcmttime,jdbcType=BIGINT},
+      </if>
+      <if test="redditscore != null" >
+        redditScore = #{redditscore,jdbcType=DOUBLE},
+      </if>
+      <if test="articleperfect != null" >
+        articlePerfect = #{articleperfect,jdbcType=INTEGER},
+      </if>
+    </set>
+    where oId = #{oid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.oneyear.spider.model.TagArticle" >
+    update symphony_tag_article
+    set article_oId = #{articleOid,jdbcType=VARCHAR},
+      tag_oId = #{tagOid,jdbcType=VARCHAR},
+      articleCommentCount = #{articlecommentcount,jdbcType=INTEGER},
+      articleLatestCmtTime = #{articlelatestcmttime,jdbcType=BIGINT},
+      redditScore = #{redditscore,jdbcType=DOUBLE},
+      articlePerfect = #{articleperfect,jdbcType=INTEGER}
+    where oId = #{oid,jdbcType=VARCHAR}
+  </update>
+</mapper>
